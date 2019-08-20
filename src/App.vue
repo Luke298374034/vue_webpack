@@ -43,6 +43,12 @@ export default {
           site: 'Firebase'
         },
         {
+          site: 'count'
+        },
+        {
+          site: 'todoVuex'
+        },
+        {
           site: 'Playground',
           subpath: ['ooxx', 'calculator', 'toDoList']
         },

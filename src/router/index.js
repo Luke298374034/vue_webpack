@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import Main from '@/components/Main'
 import Firebase from '@/components/Firebase'
+import count from '@/components/count'
+import todoVuex from '@/components/todoVuex'
 import ooxx from '@/components/Playground/ooxx'
 import calculator from '@/components/Playground/calculator'
 import toDoList from '@/components/Playground/toDoList'
@@ -24,6 +26,16 @@ export default new VueRouter({
       path: '/Firebase',
       name: 'Firebase',
       component: Firebase
+    },
+    {
+      path: '/count',
+      name: 'count',
+      component: count
+    },
+    {
+      path: '/todoVuex',
+      name: 'todoVuex',
+      component: todoVuex
     },
     {
       path: '/Playground/ooxx',
