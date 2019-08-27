@@ -1,44 +1,45 @@
 <template>
   <li>
-
-  <div v-if="!updateMode">
-    <label>
+    <div v-if="!updateMode">
+      <!-- <label>
+        <input
+          type="checkbox"
+          :checked="item.done"
+          @change="toggleTodo( item.key )">
+          {{ item.content }}
+      </label> -->
+      <custom-checkbox :item="item" @toggleTodo="toggleTodo" />
+      <button class="btn btn-xs btn-primary" @click="showEditMode">
+        <i class="far fa-edit"></i>
+      </button>
+      <button class="btn btn-xs btn-danger" @click="deleteTodo( item.key )">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div v-if="updateMode" >
       <input
-        type="checkbox"
-        :checked="item.done"
-        @change="toggleTodo( item.key )">
-        {{ item.content }}
-    </label>
-    <!-- 新增切換修改按鈕 -->
-    <button class="btn btn-xs btn-primary" @click="showEditMode">
-      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-    </button>
-    <button class="btn btn-xs btn-danger" @click="deleteTodo( item.key )">
-      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-    </button>
-  </div>
-
-  <div v-if="updateMode" >
-    <input
-      class="edit-input"
-      v-focus="updateMode"
-      placeholder="edit Todo.."
-      :value="item.content"
-      @keyup.enter="actionEdit"
-      @blur="cancelEdit"
-      @keyup.esc="cancelEdit"/>
-  </div>
-
+        class="edit-input"
+        v-focus="updateMode"
+        placeholder="edit Todo.."
+        :value="item.content"
+        @keyup.enter="actionEdit"
+        @blur="cancelEdit"
+        @keyup.esc="cancelEdit"/>
+    </div>
   </li>
 </template>
 
 <script>
 // import { mapGetters, mapActions } from 'vuex'
 import { mapActions } from 'vuex'
+import customCheckbox from './custom-checkbox.vue'
 
 export default {
   props: {
     item: Object
+  },
+  components: {
+    customCheckbox
   },
   data () {
     return {

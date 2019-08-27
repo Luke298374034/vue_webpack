@@ -3,7 +3,7 @@
     <h1>vue & vuex Todo List example</h1>
     <hr>
     <div class="row">
-      <div class="input-group col-md-4">
+      <div class="input-group col-md-12">
         <input
           type="text"
           class="form-control"
@@ -12,56 +12,58 @@
           @keyup.enter="actionAddTodo" />
         <span class="input-group-btn">
           <button class="btn btn-success" type="button" @click="actionAddTodo">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <i class="far fa-calendar-check"></i>
           </button>
         </span>
       </div>
     </div>
-    <!-- 左右兩個欄位分別存放 todo / done -->
     <div class="row">
       <div class="col-md-6">
-        <h2>Todo List:</h2>
-        <ol>
-
-      <todoItem v-for="(item, index) in todoList" :item="item" :key="index"/>
-
-        </ol>
+        <h2>Todo List</h2>
+        <ul>
+          <todoItem v-for="(item, index) in todoList" :item="item" :key="index"/>
+        </ul>
       </div>
       <div class="col-md-6">
-        <h2>Done List:</h2>
-        <ol >
+        <h2>Done List</h2>
+        <ul >
           <li v-for="(item, index) in doneList" :key="index">
-            <label>
+            <!-- <label>
               <input
                 type="checkbox"
                 :checked="item.done"
                 @change="toggleTodo( item.key )">
                 {{ item.content }}
-            </label>
+            </label> -->
+            <custom-checkbox :item="item" @toggleTodo="toggleTodo" />
           </li>
-        </ol>
+        </ul>
       </div>
     </div><!-- end row -->
+    <pre>{{ todoList }}</pre>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import todoItem from '../components/todo-item.vue'
+import customCheckbox from '../components/custom-checkbox.vue'
 
 export default {
   components: {
-    todoItem
+    todoItem,
+    customCheckbox
   },
   data () {
     return {
       newTodo: ''
     }
   },
-  computed: mapGetters({
-    todoList: 'getTodo',
-    doneList: 'getDone'
-  }),
+  computed:
+    mapGetters({
+      todoList: 'getTodo',
+      doneList: 'getDoneTodo'
+    }),
   methods: {
     ...mapActions([
       'toggleTodo',
