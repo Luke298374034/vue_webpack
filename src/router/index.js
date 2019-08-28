@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import Main from '@/components/Main'
 import Firebase from '@/components/Firebase'
-import count from '@/components/count'
-import todoVuex from '@/components/todoVuex'
+import count from '@/components/Proj1114/count'
+import todoVuex from '@/components/Proj1114/todoVuex'
 import ooxx from '@/components/Playground/ooxx'
 import calculator from '@/components/Playground/calculator'
 import toDoList from '@/components/Playground/toDoList'
@@ -14,12 +14,24 @@ import HelloWorld2 from '@/components/HelloWorld2'
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
+// nested router
+// component內必須再有一個Router-view來選擇畫面
+const User = {
+  template: `
+    <div class="user">
+      <h2>User {{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `
+}
+
 export default new VueRouter({
   mode: 'history',
   routes: [
     {
+      index: true,
       path: '/',
-      name: 'Main',
+      name: '嘦巭深兲嫑跑',
       component: Main
     },
     {
@@ -28,29 +40,43 @@ export default new VueRouter({
       component: Firebase
     },
     {
-      path: '/count',
-      name: 'count',
-      component: count
+      path: '/Proj1114',
+      name: 'Proj1114',
+      component: User,
+      children: [
+        {
+          path: 'count',
+          name: '計數器Vuex',
+          component: count
+        },
+        {
+          path: 'todoVuex',
+          name: 'todoVuex',
+          component: todoVuex
+        }
+      ]
     },
     {
-      path: '/todoVuex',
-      name: 'todoVuex',
-      component: todoVuex
-    },
-    {
-      path: '/Playground/ooxx',
-      name: 'Playground/ooxx',
-      component: ooxx
-    },
-    {
-      path: '/Playground/calculator',
-      name: 'Playground/calculator',
-      component: calculator
-    },
-    {
-      path: '/Playground/toDoList',
-      name: 'Playground/toDoList',
-      component: toDoList
+      path: '/Playground',
+      name: '小玩Yee',
+      component: User,
+      children: [
+        {
+          path: 'ooxx',
+          name: 'ooxx',
+          component: ooxx
+        },
+        {
+          path: 'calculator',
+          name: 'Windows計算機',
+          component: calculator
+        },
+        {
+          path: 'toDoList',
+          name: '待辦事項',
+          component: toDoList
+        }
+      ]
     },
     {
       path: '/HelloWorld',

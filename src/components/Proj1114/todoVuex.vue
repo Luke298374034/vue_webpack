@@ -46,8 +46,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import todoItem from '../components/todo-item.vue'
-import customCheckbox from '../components/custom-checkbox.vue'
+import todoItem from './todo-item.vue'
+import customCheckbox from './custom-checkbox.vue'
 
 export default {
   components: {

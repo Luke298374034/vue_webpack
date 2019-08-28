@@ -1,65 +1,53 @@
 <template>
   <div id="app">
+    <header></header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <router-link :to="{name:title.site}" v-text="title.name" class="navbar-brand"/>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item" v-for="(item, index) in path" :key="index" v-if="!item.subpath">
-            <router-link :to="{name:item.site}" v-text="item.site" class="nav-link"/>
-          </li>
-
-          <li class="nav-item dropdown" v-for="(item, index) in path" :key="index" v-if="item.subpath">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-text="item.site"></a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link class="dropdown-item" v-for="(subitem, index) in item.subpath" :key="index" :to="{name:item.site + '/' + subitem}" v-text="subitem"/>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+      <template v-for="(item, index) in routes">
+        <!-- type.I -->
+        <router-link v-if="item.index" :key="index" :to="{path:item.path}" v-text="item.name" class="navbar-brand"/>
+        <!-- type.II -->
+        <div v-else :key="index" class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- type.A -->
+            <li v-if="!item.children" :key="index" class="nav-item">
+              <router-link :to="{path:item.path}" v-text="item.name" class="nav-link"/>
+            </li>
+            <!-- type.B -->
+            <li v-else-if="item.children" :key="index" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-text="item.name"></a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <router-link class="dropdown-item" v-for="(subitem, index) in item.children" :key="index" :to="{path:item.path + '/' + subitem.path}" v-text="subitem.name"/>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </template>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
     <router-view/>
+    <footer></footer>
   </div>
 </template>
 
 <script>
+import router from './router/index'
 export default {
   name: 'App',
   data: function () {
     return {
+      routes: router.options.routes,
       title: {
         name: '嘦巭深兲嫑跑',
         site: 'Main'
-      },
-      path: [
-        {
-          site: 'Firebase'
-        },
-        {
-          site: 'count'
-        },
-        {
-          site: 'todoVuex'
-        },
-        {
-          site: 'Playground',
-          subpath: ['ooxx', 'calculator', 'toDoList']
-        },
-        {
-          site: 'HelloWorld'
-        },
-        {
-          site: 'HelloWorld2'
-        }
-      ]
+      }
     }
+  },
+  mounted: function () {
+    console.log(`routes`)
+    console.log(router.options.routes)
   }
 }
 </script>
@@ -77,6 +65,9 @@ export default {
   color: #2c3e50;
 }
 
+.test {
+  color: #FFFFFF;
+}
 a {
   color: #fff;
 }
