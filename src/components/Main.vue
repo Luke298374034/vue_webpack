@@ -1,12 +1,25 @@
 <template>
   <div>
-    這是首頁
+    <div>用Vue開發的網站</div>
+    <div>為學習應用先關套件而生的網站</div>
+    <div>---</div>
+    <div>HTML5 + SCSS</div>
+    <div>pug + stylus</div>
+    <div>各式插件</div>
+    <div>---</div>
+    <div>VueCli</div>
+    <div>VueRouter</div>
+    <div>Vuex</div>
+    <div>---</div>
+    <div>vue-server-renderer</div>
+    <div>Nuxt</div>
+    <div>---</div>
+    <div>Firebase</div>
   </div>
 </template>
 
 <script>
 export default {
-  // name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -15,7 +28,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;

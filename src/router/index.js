@@ -1,28 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import BootstrapVue from 'bootstrap-vue'
 import Main from '@/components/Main'
 import Firebase from '@/components/Firebase'
+
+import proj1114 from '@/components/Proj1114/proj1114'
 import count from '@/components/Proj1114/count'
 import todoVuex from '@/components/Proj1114/todoVuex'
+
 import ooxx from '@/components/Playground/ooxx'
+import playground from '@/components/Playground/playground'
 import calculator from '@/components/Playground/calculator'
 import toDoList from '@/components/Playground/toDoList'
+
 import HelloWorld from '@/components/HelloWorld'
 import HelloWorld2 from '@/components/HelloWorld2'
 
 Vue.use(VueRouter)
-Vue.use(BootstrapVue)
 
 // nested router
 // component內必須再有一個Router-view來選擇畫面
-const User = {
-  template: `
-    <div class="user">
-      <h2>User {{ $route.params.id }}</h2>
-      <router-view></router-view>
-    </div>
-  `
+const common = {
+  template: `<router-view />`
 }
 
 export default new VueRouter({
@@ -41,9 +39,14 @@ export default new VueRouter({
     },
     {
       path: '/Proj1114',
-      name: 'Proj1114',
-      component: User,
+      name: 'Proj1114654654',
+      component: common,
       children: [
+        {
+          path: '',
+          name: 'Proj1114',
+          component: proj1114
+        },
         {
           path: 'count',
           name: '計數器Vuex',
@@ -58,9 +61,14 @@ export default new VueRouter({
     },
     {
       path: '/Playground',
-      name: '小玩Yee',
-      component: User,
+      name: 'Yee',
+      component: common,
       children: [
+        {
+          path: '',
+          name: '小玩Yee',
+          component: playground
+        },
         {
           path: 'ooxx',
           name: 'ooxx',

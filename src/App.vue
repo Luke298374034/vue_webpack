@@ -6,17 +6,30 @@
         <!-- type.I -->
         <router-link v-if="item.index" :key="index" :to="{path:item.path}" v-text="item.name" class="navbar-brand"/>
         <!-- type.II -->
-        <div v-else :key="index" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div v-else :key="'II'+index" class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <!-- type.A -->
-            <li v-if="!item.children" :key="index" class="nav-item">
+            <li v-if="!item.children" :key="'A'+index" class="nav-item">
               <router-link :to="{path:item.path}" v-text="item.name" class="nav-link"/>
             </li>
             <!-- type.B -->
-            <li v-else-if="item.children" :key="index" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-text="item.name"></a>
+            <li v-else-if="item.children" :key="'B'+index" class="nav-item dropdown" style="display:inline-flex">
+              <!-- TODO 感覺可以用v-slot處理 不過不太會用0.0 -->
+              <!-- <template v-for="(subitem, index) in item.children">
+
+                <router-link v-if="subitem.path==''" :key="'sds'+index" :to="{path:item.path}" v-text="subitem.name" class="nav-link"/>
+
+                <a v-if="subitem.path==''" :key="index" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div :key="'adsda'+index" class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                  <router-link v-if="subitem.path!=''" :key="index" :to="{path:item.path + '/' + subitem.path}" v-text="subitem.name" class="dropdown-item"/>
+                </div>
+
+              </template> -->
+              <router-link :to="{path:item.path}" v-text="item.name" class="nav-link"/>
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <router-link class="dropdown-item" v-for="(subitem, index) in item.children" :key="index" :to="{path:item.path + '/' + subitem.path}" v-text="subitem.name"/>
+                <router-link v-for="(subitem, index) in item.children" :key="index" :to="{path:item.path + '/' + subitem.path}" v-text="subitem.name" class="dropdown-item"/>
               </div>
             </li>
           </ul>
