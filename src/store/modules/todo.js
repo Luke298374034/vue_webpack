@@ -55,6 +55,7 @@ const mutations = {
   },
   // 改變狀態
   [types.TOGGLE_TODO] (state, obj) {
+    // console.log(obj)
     for (var i in state.todos) {
       var item = state.todos[i]
       if (item.key === obj.key) {

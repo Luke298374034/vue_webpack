@@ -41,6 +41,7 @@
       </div>
     </div><!-- end row -->
     <pre>{{ todoList }}</pre>
+    <pre>{{ doneList }}</pre>
   </div>
 </template>
 

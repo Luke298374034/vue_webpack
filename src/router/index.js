@@ -6,8 +6,8 @@ import Firebase from '@/components/Firebase'
 import proj1114 from '@/components/Proj1114/proj1114'
 import count from '@/components/Proj1114/count'
 import todoVuex from '@/components/Proj1114/todoVuex'
-import shopVuex from '@/components/Proj1114/shopVuex'
-import cartVuex from '@/components/Proj1114/cartVuex'
+import shop from '@/components/Proj1114/shop'
+import cart from '@/components/Proj1114/cart'
 
 import ooxx from '@/components/Playground/ooxx'
 import playground from '@/components/Playground/playground'
@@ -60,14 +60,14 @@ export default new VueRouter({
           component: todoVuex
         },
         {
-          path: 'shopVuex',
+          path: 'shop',
           name: '商城',
-          component: shopVuex
+          component: shop
         },
         {
-          path: 'cartVuex',
+          path: 'cart',
           name: '購物車',
-          component: cartVuex
+          component: cart
         }
       ]
     },

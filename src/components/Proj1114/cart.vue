@@ -12,7 +12,8 @@
           <a href="#" class="navbar-brand">Shopping Cart</a>
         </div>
         <div class="collapse navbar-collapse navbar-right">
-          <router-link :to="{name: 'cart'}" class="btn navbar-btn">
+          <!-- TODO -->
+          <router-link :to="{name: '商城'}" class="btn navbar-btn">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <span class="badge">{{ cartTotal }}</span>
           </router-link>

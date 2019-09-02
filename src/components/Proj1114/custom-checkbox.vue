@@ -27,6 +27,7 @@ export default {
   methods: {
     handleChange ($event) {
       // $emit 向上傳遞的 value 直接打包成 object
+      console.log($event.target.checked)
       this.$emit('toggleTodo', {
         key: this.item.key,
         // checked(done) 直接使用 chackbox 狀態
