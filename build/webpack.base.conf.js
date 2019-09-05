@@ -3,6 +3,8 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+// const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
+// const webpack = require('webpack'); //访问内置的插件
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -74,6 +76,11 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      // FIXME
+      // },
+      // {
+      //   test: /\.pug$/,
+      //   use: ['html-loader','pug-html-loader']
       }
     ]
   },
@@ -88,5 +95,28 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
+  // FIXME
+  // },
+  // // 新增plugins
+  // plugins: [
+  //   new webpack.ProvidePlugin({
+  //       '$': "jquery",
+  //       'jQuery': "jquery",
+  //       'Popper': 'popper.js'
+  //   }),
+  //   new HtmlWebpackPlugin({
+  //     template: './src/index.pug',
+  //     filename:'./index.html'
+  //   }),
+  //   new HtmlWebpackPlugin({
+  //       template: './src/test.pug',
+  //       filename:'./test.html'
+  //   })
+  // ],
+  // Pug
+  // entry: ['./src/index.js'],
+  // output: {
+  //     path: path.resolve(__dirname, 'build'),
+  //     filename: '[name].js'
   }
 }

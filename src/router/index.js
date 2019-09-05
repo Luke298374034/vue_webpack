@@ -15,6 +15,8 @@ import playground from '@/components/Playground/playground'
 import calculator from '@/components/Playground/calculator'
 import toDoList from '@/components/Playground/toDoList'
 
+import test from '@/components/Axios/test'
+
 import HelloWorld from '@/components/HelloWorld'
 import HelloWorld2 from '@/components/HelloWorld2'
 
@@ -103,6 +105,11 @@ export default new VueRouter({
           component: toDoList
         }
       ]
+    },
+    {
+      path: '/Axios/test',
+      name: 'test',
+      component: test
     },
     {
       path: '/HelloWorld',
