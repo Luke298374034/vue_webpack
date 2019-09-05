@@ -1,10 +1,11 @@
 <template>
   <div id="app">
+    <div v-if="loading" class="loader loader-curtain is-active"></div>
     <header></header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <template v-for="(item, index) in routes">
         <!-- type.I -->
-        <router-link v-if="item.index" :key="index" :to="{path:item.path}" v-text="item.name" class="navbar-brand"/>
+        <router-link v-if="item._index" :key="'I'+index" :to="{path:item.path}" v-text="item.name" class="navbar-brand"/>
         <!-- type.II -->
         <div v-else :key="'II'+index" class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -14,7 +15,7 @@
             </li>
             <!-- type.B -->
             <li v-else-if="item.children" :key="'B'+index" class="nav-item dropdown" style="display:inline-flex">
-              <!-- TODO 感覺可以用v-slot處理 不過不太會用0.0 -->
+              <!-- FIXME 感覺可以用v-slot處理 不過不太會用0.0 -->
               <!-- <template v-for="(subitem, index) in item.children">
 
                 <router-link v-if="subitem.path==''" :key="'sds'+index" :to="{path:item.path}" v-text="subitem.name" class="nav-link"/>
@@ -46,7 +47,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import router from './router/index'
+
 export default {
   name: 'App',
   data: function () {
@@ -58,6 +61,10 @@ export default {
       }
     }
   },
+  computed: mapGetters({
+    // 取得 loading state
+    loading: 'getLoading'
+  }),
   mounted: function () {
     console.log(`routes`)
     console.log(router.options.routes)
@@ -76,16 +83,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-.test {
-  color: #FFFFFF;
-}
-a {
-  color: #fff;
-}
-a:hover {
-  color: #999;
 }
 
 nav {

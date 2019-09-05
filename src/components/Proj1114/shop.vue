@@ -3,9 +3,9 @@
   <!-- Top menu -->
   <div class="w3-white w3-xlarge w3-padding-xlarge" style="max-width:1200px;margin:auto">
     <div class="w3-right">
-      <router-link :to="{name: 'cart'}">
+      <router-link :to="{name: '購物車'}">
         <!-- 顯示購物車總產品數 -->
-        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> {{ cartTotal }}</span>
+        <i class="fas fa-shopping-cart">{{ cartTotal }}</i>
       </router-link>
     </div>
     <div class="w3-center">Shop</div>
@@ -69,5 +69,6 @@ export default {
 }
 </script>
 
-<!-- 載入 w3school - food blog template -->
-<!-- <style src="../../static/css/w3.css"></style> -->
+<style lang="css" scoped>
+  a {color: unset !important}
+</style>

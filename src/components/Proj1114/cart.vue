@@ -3,16 +3,11 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-5" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+          <i class="fas fa-shopping-cart"></i>
           <a href="#" class="navbar-brand">Shopping Cart</a>
         </div>
         <div class="collapse navbar-collapse navbar-right">
-          <!-- TODO -->
+          <!-- TODO 應該是可以把path抽成一個共用文檔 但這樣做好嗎-->
           <router-link :to="{name: '商城'}" class="btn navbar-btn">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <span class="badge">{{ cartTotal }}</span>
@@ -62,8 +57,8 @@
             <td>{{ cart.title }}</td>
             <td>
               <button
-                class="btn btn-default btn-xs glyphicon glyphicon-remove"
                 @click="cancelCart(cart.title)">
+                <i class="far fa-trash-alt"></i>
               </button>
             </td>
           </tr>
@@ -72,7 +67,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 center-block">
-        <router-link :to="{name: 'shop'}" class="btn btn-warning btn-lg btn-block">
+        <router-link :to="{name: '商城'}" class="btn btn-warning btn-lg btn-block">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
           back to Shop
         </router-link>
@@ -103,3 +98,7 @@ export default {
   ])
 }
 </script>
+
+<style lang="css" scoped>
+  a {color: unset !important}
+</style>

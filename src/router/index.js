@@ -8,6 +8,7 @@ import count from '@/components/Proj1114/count'
 import todoVuex from '@/components/Proj1114/todoVuex'
 import shop from '@/components/Proj1114/shop'
 import cart from '@/components/Proj1114/cart'
+import open1999 from '@/components/Proj1114/open1999'
 
 import ooxx from '@/components/Playground/ooxx'
 import playground from '@/components/Playground/playground'
@@ -29,7 +30,7 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     {
-      index: true,
+      _index: true,
       path: '/',
       name: '嘦巭深兲嫑跑',
       component: Main
@@ -68,6 +69,11 @@ export default new VueRouter({
           path: 'cart',
           name: '購物車',
           component: cart
+        },
+        {
+          path: 'open1999',
+          name: 'open1999',
+          component: open1999
         }
       ]
     },

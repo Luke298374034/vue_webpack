@@ -6,11 +6,11 @@ const types = {
 }
 const state = {
   todos: [
-    { key: 0, content: 'vue.js 2.0', done: true },
+    { key: 0, content: 'vue.js 2.0', done: false },
     { key: 1, content: 'vuex 2.0', done: false },
-    { key: 2, content: 'vue-router 2.0', done: false },
+    { key: 2, content: 'vue-router 2.0', done: true },
     { key: 3, content: 'vue-resource 2.0', done: false },
-    { key: 4, content: 'webpack', done: false }
+    { key: 4, content: 'webpack', done: true }
   ]
 }
 
@@ -55,10 +55,10 @@ const mutations = {
   },
   // 改變狀態
   [types.TOGGLE_TODO] (state, obj) {
-    // console.log(obj)
     for (var i in state.todos) {
       var item = state.todos[i]
       if (item.key === obj.key) {
+        // FIXME 莫名地造成在原位的checkbox勾選，看不出來是甚麼原因
         // item.done = !item.done
         // console.log('TOGGLE_TODO:', item.content, 'done?', item.done)
         item.done = obj.checked // 直接使用 chenkbox $emit 的 value

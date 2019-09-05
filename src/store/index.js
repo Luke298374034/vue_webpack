@@ -7,6 +7,8 @@ import count from './modules/count'
 import todo from './modules/todo'
 import shop from './modules/shop'
 import cart from './modules/cart'
+import opendata from './modules/opendata'
+import root from './modules/root'
 
 Vue.use(Vuex)
 
@@ -28,7 +30,9 @@ export default new Vuex.Store({
     count,
     todo,
     shop,
-    cart
+    cart,
+    opendata,
+    root
   },
 
   // 嚴格模式，禁止直接修改 state
