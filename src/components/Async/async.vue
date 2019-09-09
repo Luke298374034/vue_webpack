@@ -25,11 +25,13 @@
     input#input
     button(@click="mock") MOCK
     button(@click="get") GET
-    button(@click="mockAndGet") MOCK & GET
+    button(@click="mistakeGet") MistakeGet
+    // todo
+    //- button(@click="mockAndGet") MOCK & GET
 </template>
 
 <script>
-import { async } from '@/js/async'
+import { axios as $axios } from '@/js/async'
 export default {
   name: 'HelloWorld',
   data () {
@@ -40,23 +42,39 @@ export default {
   methods: {
     mock: function () {
       this.$log.info(`丟假資料囉`)
-      async.mock()
+      $axios.mock()
     },
     get: function () {
       this.$log.info(`來抓看看`)
-      var a = async.get()
-      this.$log.info(a)
-      a.then((response) => {
-        console.log(response)
-      })
-        .catch((err) => {
-          console.log(err)
+      $axios.get()
+        .then((res) => {
+          console.log(res)
+          return res
         })
+        // // 這邊是從 return Promise.reject(err) 來的
+        // .catch((err) => {
+        //   console.log(`直接執行get出錯`, err)
+        // })
+        .finally((res) => {
+          console.log(res)
+        })
+    },
+    mistakeGet: function () {
+      this.$log.info(`故意抓不到`)
+      $axios.mistakeGet()
+      // // 封裝故意失敗之後 就不會有response傳回來惹
+      // .then((res) => {
+      //   console.log(`mistake`, res)
+      // })
+      // catch 同樣也是抓不到der
+      // .catch((err) => {
+      //   console.log(err)
+      // })
     },
     mockAndGet: function () {
       this.$log.info(`一步驟的丟和抓`)
-      async.mock()
-      async.get()
+      $axios.mock()
+      $axios.get()
     }
   }
 }
