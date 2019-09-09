@@ -3,19 +3,19 @@ import VueRouter from 'vue-router'
 import Main from '@/components/Main'
 import Firebase from '@/components/Firebase'
 
-import proj1114 from '@/components/Proj1114/proj1114'
-import count from '@/components/Proj1114/count'
-import todoVuex from '@/components/Proj1114/todoVuex'
-import shop from '@/components/Proj1114/shop'
-import cart from '@/components/Proj1114/cart'
-import open1999 from '@/components/Proj1114/open1999'
+import proj1114 from '@/components/Vuex/proj1114'
+import count from '@/components/Vuex/count'
+import todoVuex from '@/components/Vuex/todoVuex'
+import shop from '@/components/Vuex/shop'
+import cart from '@/components/Vuex/cart'
+import open1999 from '@/components/Vuex/open1999'
 
 import ooxx from '@/components/Playground/ooxx'
 import playground from '@/components/Playground/playground'
 import calculator from '@/components/Playground/calculator'
 import toDoList from '@/components/Playground/toDoList'
 
-import test from '@/components/Axios/test'
+import async from '@/components/Async/async'
 
 import HelloWorld from '@/components/HelloWorld'
 import HelloWorld2 from '@/components/HelloWorld2'
@@ -43,8 +43,7 @@ export default new VueRouter({
       component: Firebase
     },
     {
-      path: '/Proj1114',
-      name: 'Proj1114654654',
+      path: '/Vuex',
       component: common,
       children: [
         {
@@ -107,9 +106,9 @@ export default new VueRouter({
       ]
     },
     {
-      path: '/Axios/test',
-      name: 'test',
-      component: test
+      path: '/Async/async',
+      name: 'Async',
+      component: async
     },
     {
       path: '/HelloWorld',

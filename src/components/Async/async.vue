@@ -14,53 +14,49 @@
           .modal-footer
             button.btn.btn-success save
             button.btn.bth-secondary(data-dismiss="modal") cancel
+    br
 
     <b-btn v-b-modal.modal1>Launch demo modal</b-btn>
     <b-modal id="modal1" title="Bootstrap-Vue">
       <p class="my-4">Hello from modal!</p>
     </b-modal>
+    br
 
     input#input
-    button#enter(@click="click") 打給MOCK
+    button(@click="mock") MOCK
+    button(@click="get") GET
+    button(@click="mockAndGet") MOCK & GET
 </template>
 
 <script>
-import { _test } from '@/js/test'
+import { async } from '@/js/async'
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Pug / Scss / BootStrap / jQuery'
+      msg: 'Pug / Stylus / Axios'
     }
   },
   methods: {
-    click: function () {
-      // console`.log(`in click`)
-      var T = _test().M()
-      console.log(T)
-
-      var M = _test.M
-      console.log(M)
-
-      var A = _test.A
-      console.log(A)
-
-      // var axios = require('axios')
-      // var MockAdapter = require('axios-mock-adapter')
-      // var mock = new MockAdapter(axios)
-
-      // console.log(`begin M`)
-      // mock.onGet('/users').reply(200, {
-      //   users: [
-      //     { id: 1, name: 'John Smith' }
-      //   ]
-      // })
-
-      // console.log(`begin A`)
-      // axios.get('/users')
-      //   .then(function (response) {
-      //     console.log(response.data)
-      //   })
+    mock: function () {
+      this.$log.info(`丟假資料囉`)
+      async.mock()
+    },
+    get: function () {
+      this.$log.info(`來抓看看`)
+      var a = async.get()
+      this.$log.info(a)
+      a.then((response) => {
+        console.log(response)
+      })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    mockAndGet: function () {
+      this.$log.info(`一步驟的丟和抓`)
+      async.mock()
+      async.get()
     }
   }
 }

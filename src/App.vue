@@ -66,8 +66,8 @@ export default {
     loading: 'getLoading'
   }),
   mounted: function () {
-    console.log(`routes`)
-    console.log(router.options.routes)
+    this.$log.info(`routes`)
+    this.$log.info(router.options.routes)
   }
 }
 </script>

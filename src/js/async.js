@@ -1,34 +1,37 @@
 // eslint-disable-next-line
-const _test = (() => {
+const async = (() => {
   var axios = require('axios')
   var MockAdapter = require('axios-mock-adapter')
-
-  // This sets the mock adapter on the default instance
   var mock = new MockAdapter(axios)
 
   // Mock any GET request to /users
   // arguments for reply are (status, data, headers)
-  const M = function () {
-    console.log(`begin M`)
+  const _mock = function () {
     mock.onGet('/users').reply(200, {
       users: [
         { id: 1, name: 'John Smith' }
       ]
     })
-    console.log(`finish M`)
   }
 
-  const A = axios.get('/users')
-    .then(function (response) {
-      console.log(response.data)
-    })
+  const _get = function () {
+    return axios.get('/users')
+      .then(function (response) {
+        // console.log(response.data)
+        // return response
+      })
+      .catch(function (error) {
+        console.error(error)
+      })
+    // return `sfasfjl`
+  }
 
   return {
-    M: M,
-    A: A
+    mock: _mock,
+    get: _get
   }
 })()
 
 export {
-  _test
+  async
 }

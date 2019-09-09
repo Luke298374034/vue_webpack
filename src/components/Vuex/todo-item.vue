@@ -73,7 +73,7 @@ export default {
     },
     actionEdit (e) {
       const userChange = e.target.value.trim()
-      console.log('userChange', this.item.key, userChange)
+      this.$log.info('userChange', this.item.key, userChange)
       this.updateTodo({
         key: this.item.key,
         change: userChange
