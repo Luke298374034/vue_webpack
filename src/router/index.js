@@ -80,7 +80,7 @@ export default new VueRouter({
     },
     {
       path: '/Playground',
-      name: 'Yee',
+      // name: 'Yee',
       component: common,
       children: [
         {

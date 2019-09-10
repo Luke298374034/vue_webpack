@@ -6,16 +6,18 @@ const axios = (() => {
 
   // Mock any GET request to /users
   // arguments for reply are (status, data, headers)
-  const _mock = function () {
-    mock.onGet('/users').reply(200, {
+  const _mockget = function (path) {
+    mock.onGet(path).reply(200, {
       users: [
-        { id: 1, name: 'John Smith' }
+        { id: 1, name: 'John Smith' },
+        { id: 2, name: 'John Cena' },
+        { id: 3, name: 'Bob Smith' }
       ]
     })
   }
 
-  const _get = function () {
-    return axios.get('/users')
+  const _get = function (path) {
+    return axios.get(path)
       .then((res) => {
         console.log(`in async get`, res)
         res.path = `1 -> `
@@ -55,10 +57,32 @@ const axios = (() => {
       })
   }
 
+  const _mockpost = function (path) {
+    mock.onPost(path).reply(200, {
+      users: [
+        { id: 1, name: 'Pop Smith' },
+        { id: 2, name: 'Pop Cena' },
+        { id: 3, name: 'Pop Smith' }
+      ]
+    })
+  }
+
+  const _post = function () {
+    return axios.post('/users', {})
+      .then((res) => {
+        console.log(`in async post`, res)
+        return res
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
   return {
-    mock: _mock,
+    mockget: _mockget,
     get: _get,
-    mistakeGet: _mistakeGet
+    mistakeGet: _mistakeGet,
+    mockpost: _mockpost,
+    post: _post
   }
 })()
 

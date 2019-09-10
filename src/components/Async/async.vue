@@ -22,31 +22,46 @@
     </b-modal>
     br
 
-    input#input
-    button(@click="mock") MOCK
-    button(@click="get") GET
+    input#path-input(v-model="path")
+    button(@click="mockget(path)") MOCKGET
+    button(@click="get(path)") GET
     button(@click="mistakeGet") MistakeGet
-    // todo
-    //- button(@click="mockAndGet") MOCK & GET
+    button(@click="mockAndGet") MOCK & GET
+    br
+
+    input#data-input(v-model="data")
+    button(@click="mockpost(path)") MOCKPOST
+    button(@click="post(path)") POST
+    br
+
+    button(@click="mockjs") Mock All
+    button(@click="login") Login
 </template>
 
 <script>
 import { axios as $axios } from '@/js/async'
+import { mockjs as $mockjs } from '@/js/mock'
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Pug / Stylus / Axios'
+      msg: 'Pug / Stylus / Axios',
+      path: '/users',
+      data: [
+        { id: 1, name: 'John Smith' },
+        { id: 2, name: 'John Cena' },
+        { id: 3, name: 'Bob Smith' }
+      ]
     }
   },
   methods: {
-    mock: function () {
-      this.$log.info(`丟假資料囉`)
-      $axios.mock()
+    mockget: function (path) {
+      this.$log.info(`丟假資料囉到`, path)
+      $axios.mockget(path)
     },
-    get: function () {
-      this.$log.info(`來抓看看`)
-      $axios.get()
+    get: function (path) {
+      this.$log.info(`來抓看看`, path)
+      $axios.get(path)
         .then((res) => {
           console.log(res)
           return res
@@ -72,9 +87,45 @@ export default {
       // })
     },
     mockAndGet: function () {
-      this.$log.info(`一步驟的丟和抓`)
-      $axios.mock()
-      $axios.get()
+      this.$log.info(`一步驟的丟和抓 就利用promise來排順序`)
+      new Promise(function (resolve, reject) {
+        $axios.mock()
+        resolve(`我回被傳給then使用~`)
+      }).then((res) => {
+        console.log(res)
+        $axios.get()
+      })
+    },
+    mockpost: function (path) {
+      this.$log.info(`建立Post資料`)
+      $axios.mockpost()
+    },
+    post: function (path) {
+      this.$log.info(`試試POST`)
+      $axios.post(path)
+    },
+    mockjs: function (path) {
+      this.$log.info(`搞了半天的Mockjs 來測試看看唄`, `一次Mock全部`)
+      $axios.mockget(path)
+      $mockjs.login(path)
+      $mockjs.getUserList()
+      $mockjs.deleteUser()
+      $mockjs.deleteMoreUsers()
+      $mockjs.editUser()
+      $mockjs.newUser()
+    },
+    login: function () {
+      this.$log.info(`試著接別人的API`)
+      $axios.post('/loginUser', {
+        userName: 'admin',
+        password: '123456'
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
