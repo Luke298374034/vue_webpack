@@ -4,17 +4,18 @@ const axios = (() => {
   var MockAdapter = require('axios-mock-adapter')
   var mock = new MockAdapter(axios)
 
-  // Mock any GET request to /users
-  // arguments for reply are (status, data, headers)
-  const _mockget = function (path) {
-    mock.onGet(path).reply(200, {
-      users: [
-        { id: 1, name: 'John Smith' },
-        { id: 2, name: 'John Cena' },
-        { id: 3, name: 'Bob Smith' }
-      ]
-    })
-  }
+  // 拉出來包裝 出錯 就先不這樣做了
+  // // Mock any GET request to /users
+  // // arguments for reply are (status, data, headers)
+  // const _mockget = function (path) {
+  //   mock.onGet(path).reply(200, {
+  //     users: [
+  //       { id: 1, name: 'John AA' },
+  //       { id: 2, name: 'John Cena' },
+  //       { id: 3, name: 'Bob Smith' }
+  //     ]
+  //   })
+  // }
 
   const _get = function (path) {
     return axios.get(path)
@@ -29,7 +30,7 @@ const axios = (() => {
         return res
       })
       .catch((err) => {
-        console.error(`in async get error`, err)
+        console.error(`in async get error \n`, err)
         // // 還是可以return Promise 回去
         // return Promise.reject(err)
       })
@@ -40,8 +41,8 @@ const axios = (() => {
       // })
   }
 
-  const _mistakeGet = function () {
-    return axios.get('/users')
+  const _mistakeGet = function (path) {
+    return axios.get(path)
       .then((res) => {
         console.log(`in async mistake get`, res)
         res.path = `A -> `
@@ -78,7 +79,7 @@ const axios = (() => {
       })
   }
   return {
-    mockget: _mockget,
+    // mockget: _mockget,
     get: _get,
     mistakeGet: _mistakeGet,
     mockpost: _mockpost,
