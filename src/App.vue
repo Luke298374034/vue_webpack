@@ -42,6 +42,9 @@
       </form>
     </nav>
     <router-view/>
+    <!-- 下面這兩個用於雙重畫面 -->
+    <router-view name="ViewLeft"/>
+    <router-view name="ViewRight"/>
     <footer></footer>
   </div>
 </template>

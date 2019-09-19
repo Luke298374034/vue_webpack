@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import store from '../store'
+
 import Main from '@/components/Main'
 import Firebase from '@/components/Firebase'
 
@@ -9,6 +12,7 @@ import todoVuex from '@/components/Vuex/todoVuex'
 import shop from '@/components/Vuex/shop'
 import cart from '@/components/Vuex/cart'
 import open1999 from '@/components/Vuex/open1999'
+import login from '@/components/Vuex/login'
 
 import ooxx from '@/components/Playground/ooxx'
 import playground from '@/components/Playground/playground'
@@ -19,16 +23,22 @@ import async from '@/components/Async/async'
 
 import HelloWorld from '@/components/HelloWorld'
 import HelloWorld2 from '@/components/HelloWorld2'
+import hello from '@/components/hello'
 
 Vue.use(VueRouter)
 
 // nested router
 // component內必須再有一個Router-view來選擇畫面
+// 其實就是Router-view再包一個Router-view
 const common = {
-  template: `<router-view />`
+  template: `<div style="border:gray solid 1px"> 這裡是Common唷 也是一個可以用來做子母畫面的地方
+                  但我我覺得如是NavBar就直接寫在Index了吧
+              <router-view style="border:blue solid 1px"/>
+            </div>`
 }
 
-export default new VueRouter({
+const router = new VueRouter({
+  // 這行是為了網址不要有HashTag
   mode: 'history',
   routes: [
     {
@@ -75,6 +85,11 @@ export default new VueRouter({
           path: 'open1999',
           name: 'open1999',
           component: open1999
+        },
+        {
+          path: 'login',
+          name: '登入',
+          component: login
         }
       ]
     },
@@ -119,6 +134,40 @@ export default new VueRouter({
       path: '/HelloWorld2',
       name: 'HelloWorld2',
       component: HelloWorld2
+    },
+    {
+      path: '/hello',
+      name: '哈囉',
+      component: hello,
+      meta: { requiresAuth: true } // 需驗證
+    },
+    {
+      path: '/multi',
+      name: '多重畫面',
+      components: {ViewLeft: login, ViewRight: hello}
     }
   ]
 })
+
+// 頁面轉跳驗證
+router.beforeEach((to, from, next) => {
+  // 如果 router 轉跳的頁面需要驗證 requiresAuth: true
+  console.log('to=', to.fullPath, '| from=', from.fullPath)
+  if (to.matched.some(record => {
+    console.log(record.name, record.meta.requiresAuth)
+    return record.meta.requiresAuth
+  })) {
+    // 如果沒有 token
+    console.log('token?', store.state.token)
+    if (store.state.token === '' || store.state.token === undefined) {
+      // 轉跳到 login page
+      next({ path: '/Vuex/login' })
+    } else {
+      next() // 往下繼續執行
+    }
+  } else {
+    next() // 往下繼續執行
+  }
+})
+
+export default router
